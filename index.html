@@ -708,10 +708,34 @@ async function submitForm() {
     status: 'PENDENTE'
   };
 
-  // Enviar para Google Sheets
+  // Enviar para Google Sheets via form + iframe (evita problemas de CORS)
   try {
-    const url = CONFIG.SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(payload));
-    await fetch(url, { method: 'GET', mode: 'no-cors' });
+    await new Promise((resolve, reject) => {
+      const iframe = document.createElement('iframe');
+      iframe.name = 'hidden-form-target';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = CONFIG.SCRIPT_URL;
+      form.target = 'hidden-form-target';
+
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'data';
+      input.value = JSON.stringify(payload);
+      form.appendChild(input);
+
+      document.body.appendChild(form);
+      iframe.onload = () => {
+        form.remove();
+        iframe.remove();
+        resolve();
+      };
+      setTimeout(() => { form.remove(); iframe.remove(); resolve(); }, 5000);
+      form.submit();
+    });
   } catch (e) {
     console.log('Dados para backup:', payload);
   }
