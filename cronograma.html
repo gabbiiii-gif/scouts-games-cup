@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scouts Games Cup — Cronograma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08080e;
+    --bg2: #0f0f1a;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.07);
+    --text: #d0d0da;
+    --text2: #888;
+    --text3: #555;
+    --ff: #FF6B00;
+    --ff-glow: rgba(255,107,0,0.12);
+    --bs: #FFCE00;
+    --bs-glow: rgba(255,206,0,0.12);
+    --mc: #55C156;
+    --mc-glow: rgba(85,193,86,0.12);
+    --wr: #1DA1F2;
+    --wr-glow: rgba(29,161,242,0.12);
+    --radius: 12px;
+    --font: 'Outfit', sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 40px 20px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 260px;
+    background: radial-gradient(ellipse, rgba(255,107,0,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 4px;
+    color: var(--text3); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 900; letter-spacing: -0.5px;
+    background: linear-gradient(90deg, var(--ff), var(--bs), var(--mc), var(--wr));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p { font-size: 13px; color: var(--text3); margin-top: 6px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--ff); font-size: 13px; font-weight: 600;
+    text-decoration: none; margin-bottom: 28px;
+    transition: opacity 0.2s;
+  }
+  .back-link:hover { opacity: 0.8; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 11px; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--ff), var(--bs), var(--mc), var(--wr));
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+  }
+  .timeline-dot {
+    position: absolute; left: -32px; top: 6px;
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    border: 2px solid var(--bg);
+  }
+  .timeline-dot.ff { background: var(--ff); }
+  .timeline-dot.bs { background: var(--bs); }
+  .timeline-dot.mc { background: var(--mc); }
+  .timeline-dot.wr { background: var(--wr); }
+  .timeline-dot.general { background: var(--text3); }
+
+  .timeline-card {
+    padding: 16px 18px; border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .timeline-card:hover { border-color: rgba(255,255,255,0.12); }
+
+  .timeline-date {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 4px;
+  }
+  .timeline-date.ff { color: var(--ff); }
+  .timeline-date.bs { color: var(--bs); }
+  .timeline-date.mc { color: var(--mc); }
+  .timeline-date.wr { color: var(--wr); }
+  .timeline-date.general { color: var(--text2); }
+
+  .timeline-title {
+    font-size: 15px; font-weight: 800; color: #ddd; margin-bottom: 4px;
+  }
+  .timeline-desc {
+    font-size: 12px; color: var(--text2); line-height: 1.6;
+  }
+  .timeline-badge {
+    display: inline-block; margin-top: 8px;
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .timeline-badge.ff { background: var(--ff-glow); color: var(--ff); }
+  .timeline-badge.bs { background: var(--bs-glow); color: var(--bs); }
+  .timeline-badge.mc { background: var(--mc-glow); color: var(--mc); }
+  .timeline-badge.wr { background: var(--wr-glow); color: var(--wr); }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    margin-top: 32px; padding: 18px;
+    border-radius: var(--radius);
+    background: rgba(255,107,0,0.03);
+    border: 1px solid rgba(255,107,0,0.1);
+    text-align: center;
+  }
+  .info-box p {
+    font-size: 13px; color: var(--text2); line-height: 1.7;
+  }
+  .info-box strong { color: var(--ff); }
+
+  /* ── CTA ── */
+  .cta-box {
+    text-align: center; margin-top: 36px;
+  }
+  .cta-btn {
+    display: inline-block; padding: 14px 36px; border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--ff), #e05500);
+    color: #fff; font-size: 15px; font-weight: 700; font-family: var(--font);
+    text-decoration: none; transition: filter 0.2s;
+  }
+  .cta-btn:hover { filter: brightness(1.1); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Calendario</div>
+  <h1>SCOUTS GAMES CUP</h1>
+  <p>Cronograma oficial do campeonato</p>
+</div>
+
+<div class="container">
+
+<a href="index.html" class="back-link">&larr; Voltar para inscricao</a>
+
+<div class="timeline">
+
+  <!-- INSCRICOES -->
+  <div class="timeline-item">
+    <div class="timeline-dot general"></div>
+    <div class="timeline-card">
+      <div class="timeline-date general">A definir</div>
+      <div class="timeline-title">Abertura das Inscricoes</div>
+      <div class="timeline-desc">Inicio do periodo de inscricao para todas as modalidades. Garanta sua vaga!</div>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-dot general"></div>
+    <div class="timeline-card">
+      <div class="timeline-date general">A definir</div>
+      <div class="timeline-title">Encerramento das Inscricoes</div>
+      <div class="timeline-desc">Ultimo dia para realizar inscricao e enviar comprovante PIX.</div>
+    </div>
+  </div>
+
+  <!-- FREE FIRE -->
+  <div class="timeline-item">
+    <div class="timeline-dot ff"></div>
+    <div class="timeline-card">
+      <div class="timeline-date ff">A definir</div>
+      <div class="timeline-title">Free Fire — Fase de Grupos</div>
+      <div class="timeline-desc">Squads se enfrentam em partidas classificatorias. Os melhores avancam para a final.</div>
+      <span class="timeline-badge ff">🔥 Free Fire</span>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-dot ff"></div>
+    <div class="timeline-card">
+      <div class="timeline-date ff">A definir</div>
+      <div class="timeline-title">Free Fire — Grande Final</div>
+      <div class="timeline-desc">Finais ao vivo com os melhores squads do campeonato.</div>
+      <span class="timeline-badge ff">🔥 Free Fire</span>
+    </div>
+  </div>
+
+  <!-- BRAWL STARS -->
+  <div class="timeline-item">
+    <div class="timeline-dot bs"></div>
+    <div class="timeline-card">
+      <div class="timeline-date bs">A definir</div>
+      <div class="timeline-title">Brawl Stars — Fase Eliminatoria</div>
+      <div class="timeline-desc">Confrontos diretos em MD3. Trios eliminados saem do campeonato.</div>
+      <span class="timeline-badge bs">⭐ Brawl Stars</span>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-dot bs"></div>
+    <div class="timeline-card">
+      <div class="timeline-date bs">A definir</div>
+      <div class="timeline-title">Brawl Stars — Grande Final</div>
+      <div class="timeline-desc">Final em MD5 entre os dois melhores trios.</div>
+      <span class="timeline-badge bs">⭐ Brawl Stars</span>
+    </div>
+  </div>
+
+  <!-- MINECRAFT -->
+  <div class="timeline-item">
+    <div class="timeline-dot mc"></div>
+    <div class="timeline-card">
+      <div class="timeline-date mc">A definir</div>
+      <div class="timeline-title">Minecraft — Rodadas Classificatorias</div>
+      <div class="timeline-desc">Jogadores competem no modo definido pela organizacao. Solo e duplas separados.</div>
+      <span class="timeline-badge mc">⛏️ Minecraft</span>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-dot mc"></div>
+    <div class="timeline-card">
+      <div class="timeline-date mc">A definir</div>
+      <div class="timeline-title">Minecraft — Grande Final</div>
+      <div class="timeline-desc">Finais para coroar os campeoes do Minecraft.</div>
+      <span class="timeline-badge mc">⛏️ Minecraft</span>
+    </div>
+  </div>
+
+  <!-- WILD RIFT -->
+  <div class="timeline-item">
+    <div class="timeline-dot wr"></div>
+    <div class="timeline-card">
+      <div class="timeline-date wr">A definir</div>
+      <div class="timeline-title">Wild Rift — Fase de Grupos</div>
+      <div class="timeline-desc">Partidas em MD1. Os melhores squads avancam para as eliminatorias.</div>
+      <span class="timeline-badge wr">⚔️ Wild Rift</span>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-dot wr"></div>
+    <div class="timeline-card">
+      <div class="timeline-date wr">A definir</div>
+      <div class="timeline-title">Wild Rift — Grande Final</div>
+      <div class="timeline-desc">Final em MD5. Quem sera o squad campeao?</div>
+      <span class="timeline-badge wr">⚔️ Wild Rift</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="info-box">
+  <p><strong>Datas e horarios</strong> serao divulgados em breve.<br>Fique atento ao grupo do WhatsApp e ao Instagram para atualizacoes!</p>
+</div>
+
+<div class="cta-box">
+  <a href="index.html" class="cta-btn">Fazer minha inscricao &rarr;</a>
+</div>
+
+</div>
+</body>
+</html>
