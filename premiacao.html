@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scouts Games Cup — Premiacao</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08080e;
+    --bg2: #0f0f1a;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.07);
+    --text: #d0d0da;
+    --text2: #888;
+    --text3: #555;
+    --ff: #FF6B00;
+    --ff-glow: rgba(255,107,0,0.12);
+    --bs: #FFCE00;
+    --bs-glow: rgba(255,206,0,0.12);
+    --mc: #55C156;
+    --mc-glow: rgba(85,193,86,0.12);
+    --wr: #1DA1F2;
+    --wr-glow: rgba(29,161,242,0.12);
+    --gold: #FFD700;
+    --silver: #C0C0C0;
+    --bronze: #CD7F32;
+    --radius: 12px;
+    --font: 'Outfit', sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 40px 20px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 260px;
+    background: radial-gradient(ellipse, rgba(255,107,0,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 4px;
+    color: var(--text3); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 900; letter-spacing: -0.5px;
+    background: linear-gradient(90deg, var(--ff), var(--bs), var(--mc), var(--wr));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p { font-size: 13px; color: var(--text3); margin-top: 6px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--ff); font-size: 13px; font-weight: 600;
+    text-decoration: none; margin-bottom: 28px;
+    transition: opacity 0.2s;
+  }
+  .back-link:hover { opacity: 0.8; }
+
+  /* ── GAME SECTION ── */
+  .game-section {
+    margin-bottom: 36px;
+  }
+  .game-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .game-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .game-icon.ff { background: var(--ff-glow); }
+  .game-icon.bs { background: var(--bs-glow); }
+  .game-icon.mc { background: var(--mc-glow); }
+  .game-icon.wr { background: var(--wr-glow); }
+  .game-name {
+    font-size: 18px; font-weight: 800;
+  }
+  .game-name.ff { color: var(--ff); }
+  .game-name.bs { color: var(--bs); }
+  .game-name.mc { color: var(--mc); }
+  .game-name.wr { color: var(--wr); }
+
+  /* ── PODIUM ── */
+  .podium {
+    display: flex; align-items: flex-end; justify-content: center;
+    gap: 10px; margin-bottom: 16px;
+  }
+  .podium-place {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 16px 12px; border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    flex: 1; max-width: 160px;
+    transition: border-color 0.2s;
+  }
+  .podium-place:hover { border-color: rgba(255,255,255,0.12); }
+  .podium-place.first {
+    padding: 22px 12px;
+    border-color: rgba(255,215,0,0.2);
+    background: rgba(255,215,0,0.03);
+  }
+  .podium-medal {
+    font-size: 32px; margin-bottom: 8px;
+  }
+  .podium-rank {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 6px;
+  }
+  .podium-rank.gold { color: var(--gold); }
+  .podium-rank.silver { color: var(--silver); }
+  .podium-rank.bronze { color: var(--bronze); }
+
+  .podium-prize {
+    font-size: 20px; font-weight: 900; color: #ddd;
+    margin-bottom: 4px;
+  }
+  .podium-place.first .podium-prize {
+    font-size: 24px;
+    background: linear-gradient(135deg, var(--gold), #FFA500);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .podium-desc {
+    font-size: 11px; color: var(--text3); text-align: center;
+  }
+
+  /* ── PRIZE POOL ── */
+  .prize-pool {
+    text-align: center; padding: 14px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+  .prize-pool-label {
+    font-size: 10px; font-weight: 700; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;
+  }
+  .prize-pool-value {
+    font-size: 16px; font-weight: 800; color: var(--text2);
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    margin-top: 32px; padding: 18px;
+    border-radius: var(--radius);
+    background: rgba(255,107,0,0.03);
+    border: 1px solid rgba(255,107,0,0.1);
+    text-align: center;
+  }
+  .info-box p {
+    font-size: 13px; color: var(--text2); line-height: 1.7;
+  }
+  .info-box strong { color: var(--ff); }
+
+  /* ── CTA ── */
+  .cta-box {
+    text-align: center; margin-top: 36px;
+  }
+  .cta-btn {
+    display: inline-block; padding: 14px 36px; border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--ff), #e05500);
+    color: #fff; font-size: 15px; font-weight: 700; font-family: var(--font);
+    text-decoration: none; transition: filter 0.2s;
+  }
+  .cta-btn:hover { filter: brightness(1.1); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Premios</div>
+  <h1>SCOUTS GAMES CUP</h1>
+  <p>Premiacao oficial do campeonato</p>
+</div>
+
+<div class="container">
+
+<a href="index.html" class="back-link">&larr; Voltar para inscricao</a>
+
+<!-- ══════════ FREE FIRE ══════════ -->
+<div class="game-section">
+  <div class="game-header">
+    <div class="game-icon ff">🔥</div>
+    <div class="game-name ff">Free Fire</div>
+  </div>
+  <div class="podium">
+    <div class="podium-place">
+      <div class="podium-medal">🥈</div>
+      <div class="podium-rank silver">2o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Vice-campeao</div>
+    </div>
+    <div class="podium-place first">
+      <div class="podium-medal">🥇</div>
+      <div class="podium-rank gold">1o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Campeao</div>
+    </div>
+    <div class="podium-place">
+      <div class="podium-medal">🥉</div>
+      <div class="podium-rank bronze">3o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Terceiro lugar</div>
+    </div>
+  </div>
+  <div class="prize-pool">
+    <div class="prize-pool-label">Inscricao</div>
+    <div class="prize-pool-value">R$ 20 por squad</div>
+  </div>
+</div>
+
+<!-- ══════════ BRAWL STARS ══════════ -->
+<div class="game-section">
+  <div class="game-header">
+    <div class="game-icon bs">⭐</div>
+    <div class="game-name bs">Brawl Stars</div>
+  </div>
+  <div class="podium">
+    <div class="podium-place">
+      <div class="podium-medal">🥈</div>
+      <div class="podium-rank silver">2o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Vice-campeao</div>
+    </div>
+    <div class="podium-place first">
+      <div class="podium-medal">🥇</div>
+      <div class="podium-rank gold">1o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Campeao</div>
+    </div>
+    <div class="podium-place">
+      <div class="podium-medal">🥉</div>
+      <div class="podium-rank bronze">3o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Terceiro lugar</div>
+    </div>
+  </div>
+  <div class="prize-pool">
+    <div class="prize-pool-label">Inscricao</div>
+    <div class="prize-pool-value">R$ 15 por trio</div>
+  </div>
+</div>
+
+<!-- ══════════ MINECRAFT ══════════ -->
+<div class="game-section">
+  <div class="game-header">
+    <div class="game-icon mc">⛏️</div>
+    <div class="game-name mc">Minecraft</div>
+  </div>
+  <div class="podium">
+    <div class="podium-place">
+      <div class="podium-medal">🥈</div>
+      <div class="podium-rank silver">2o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Vice-campeao</div>
+    </div>
+    <div class="podium-place first">
+      <div class="podium-medal">🥇</div>
+      <div class="podium-rank gold">1o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Campeao</div>
+    </div>
+    <div class="podium-place">
+      <div class="podium-medal">🥉</div>
+      <div class="podium-rank bronze">3o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Terceiro lugar</div>
+    </div>
+  </div>
+  <div class="prize-pool">
+    <div class="prize-pool-label">Inscricao</div>
+    <div class="prize-pool-value">R$ 10 por jogador</div>
+  </div>
+</div>
+
+<!-- ══════════ WILD RIFT ══════════ -->
+<div class="game-section">
+  <div class="game-header">
+    <div class="game-icon wr">⚔️</div>
+    <div class="game-name wr">Wild Rift</div>
+  </div>
+  <div class="podium">
+    <div class="podium-place">
+      <div class="podium-medal">🥈</div>
+      <div class="podium-rank silver">2o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Vice-campeao</div>
+    </div>
+    <div class="podium-place first">
+      <div class="podium-medal">🥇</div>
+      <div class="podium-rank gold">1o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Campeao</div>
+    </div>
+    <div class="podium-place">
+      <div class="podium-medal">🥉</div>
+      <div class="podium-rank bronze">3o Lugar</div>
+      <div class="podium-prize">A definir</div>
+      <div class="podium-desc">Terceiro lugar</div>
+    </div>
+  </div>
+  <div class="prize-pool">
+    <div class="prize-pool-label">Inscricao</div>
+    <div class="prize-pool-value">R$ 25 por squad</div>
+  </div>
+</div>
+
+<div class="info-box">
+  <p><strong>Valores da premiacao</strong> serao definidos com base no numero de inscritos.<br>Quanto mais participantes, maior o premio!</p>
+</div>
+
+<div class="cta-box">
+  <a href="index.html" class="cta-btn">Fazer minha inscricao &rarr;</a>
+</div>
+
+</div>
+</body>
+</html>
