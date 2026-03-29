@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scouts Games Cup — Regras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08080e;
+    --bg2: #0f0f1a;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.07);
+    --text: #d0d0da;
+    --text2: #888;
+    --text3: #555;
+    --ff: #FF6B00;
+    --ff-glow: rgba(255,107,0,0.12);
+    --bs: #FFCE00;
+    --bs-glow: rgba(255,206,0,0.12);
+    --mc: #55C156;
+    --mc-glow: rgba(85,193,86,0.12);
+    --wr: #1DA1F2;
+    --wr-glow: rgba(29,161,242,0.12);
+    --danger: #ff4455;
+    --radius: 12px;
+    --font: 'Outfit', sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    text-align: center;
+    padding: 40px 20px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 260px;
+    background: radial-gradient(ellipse, rgba(255,107,0,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 4px;
+    color: var(--text3); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 30px; font-weight: 900; letter-spacing: -0.5px;
+    background: linear-gradient(90deg, var(--ff), var(--bs), var(--mc), var(--wr));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p { font-size: 13px; color: var(--text3); margin-top: 6px; }
+
+  /* ── BACK LINK ── */
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--ff); font-size: 13px; font-weight: 600;
+    text-decoration: none; margin-bottom: 28px;
+    transition: opacity 0.2s;
+  }
+  .back-link:hover { opacity: 0.8; }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .section-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .section-icon.ff { background: var(--ff-glow); }
+  .section-icon.bs { background: var(--bs-glow); }
+  .section-icon.mc { background: var(--mc-glow); }
+  .section-icon.wr { background: var(--wr-glow); }
+  .section-title {
+    font-size: 18px; font-weight: 800;
+  }
+  .section-title.ff { color: var(--ff); }
+  .section-title.bs { color: var(--bs); }
+  .section-title.mc { color: var(--mc); }
+  .section-title.wr { color: var(--wr); }
+
+  .rule-card {
+    padding: 18px; border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-bottom: 10px;
+  }
+  .rule-card ul {
+    list-style: none; padding: 0;
+  }
+  .rule-card li {
+    font-size: 13px; color: var(--text2); line-height: 1.7;
+    padding: 5px 0 5px 16px;
+    position: relative;
+  }
+  .rule-card li::before {
+    content: '';
+    position: absolute; left: 0; top: 12px;
+    width: 6px; height: 6px; border-radius: 50%;
+  }
+  .rule-card.ff li::before { background: var(--ff); }
+  .rule-card.bs li::before { background: var(--bs); }
+  .rule-card.mc li::before { background: var(--mc); }
+  .rule-card.wr li::before { background: var(--wr); }
+
+  /* ── GENERAL RULES ── */
+  .general-section {
+    margin-bottom: 28px;
+  }
+  .general-title {
+    font-size: 18px; font-weight: 800; color: #ddd;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .general-card {
+    padding: 18px; border-radius: var(--radius);
+    background: rgba(255,107,0,0.03);
+    border: 1px solid rgba(255,107,0,0.1);
+  }
+  .general-card li {
+    font-size: 13px; color: var(--text2); line-height: 1.7;
+    padding: 5px 0 5px 16px;
+    position: relative;
+    list-style: none;
+  }
+  .general-card li::before {
+    content: '';
+    position: absolute; left: 0; top: 12px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--ff);
+  }
+
+  /* ── CTA ── */
+  .cta-box {
+    text-align: center; margin-top: 36px;
+  }
+  .cta-btn {
+    display: inline-block; padding: 14px 36px; border-radius: var(--radius);
+    background: linear-gradient(135deg, var(--ff), #e05500);
+    color: #fff; font-size: 15px; font-weight: 700; font-family: var(--font);
+    text-decoration: none; transition: filter 0.2s;
+  }
+  .cta-btn:hover { filter: brightness(1.1); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-tag">Regulamento</div>
+  <h1>SCOUTS GAMES CUP</h1>
+  <p>Regras oficiais do campeonato</p>
+</div>
+
+<div class="container">
+
+<a href="index.html" class="back-link">&larr; Voltar para inscricao</a>
+
+<!-- ══════════ REGRAS GERAIS ══════════ -->
+<div class="general-section">
+  <div class="general-title">Regras Gerais</div>
+  <div class="general-card">
+    <ul>
+      <li>Proibido o uso de hacks, emuladores ou qualquer software externo que de vantagem.</li>
+      <li>Xingamentos, racismo, homofobia ou qualquer forma de discriminacao resultam em eliminacao imediata.</li>
+      <li>A organizacao pode transmitir partidas ao vivo.</li>
+      <li>Pagamento exclusivamente via PIX. Inscricao confirmada somente apos envio do comprovante.</li>
+      <li>Menores de 16 anos precisam de autorizacao do responsavel (enviar print junto ao comprovante).</li>
+      <li>Jogadores que nao comparecerem no horario marcado serao desclassificados apos 10 minutos de tolerancia.</li>
+      <li>Decisoes da organizacao sao finais e inapelaveis.</li>
+      <li>Ao se inscrever, o participante concorda com todas as regras listadas.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════ FREE FIRE ══════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon ff">🔥</div>
+    <div class="section-title ff">Free Fire</div>
+  </div>
+  <div class="rule-card ff">
+    <ul>
+      <li>Formato: Squad (4 jogadores por equipe).</li>
+      <li>Inscricao: R$ 20 por squad.</li>
+      <li>Modo de jogo: Classico — mapa definido pela organizacao.</li>
+      <li>Proibido uso de emulador — apenas dispositivos moveis.</li>
+      <li>Cada jogador deve usar a conta propria (sem contas emprestadas).</li>
+      <li>Em caso de queda (crash/desconexao), a partida NAO sera reiniciada.</li>
+      <li>Classificacao por pontuacao: abates + posicionamento.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════ BRAWL STARS ══════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon bs">⭐</div>
+    <div class="section-title bs">Brawl Stars</div>
+  </div>
+  <div class="rule-card bs">
+    <ul>
+      <li>Formato: Trio (3 jogadores por equipe).</li>
+      <li>Inscricao: R$ 15 por trio.</li>
+      <li>Modo de jogo: definido pela organizacao a cada rodada.</li>
+      <li>Brawlers banidos serao anunciados antes de cada partida.</li>
+      <li>Proibido uso de emulador — apenas dispositivos moveis.</li>
+      <li>Melhor de 3 (MD3) nas fases eliminatorias; final em MD5.</li>
+      <li>Cada jogador deve usar a conta propria.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════ MINECRAFT ══════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon mc">⛏️</div>
+    <div class="section-title mc">Minecraft</div>
+  </div>
+  <div class="rule-card mc">
+    <ul>
+      <li>Formato: Solo ou Dupla.</li>
+      <li>Inscricao: R$ 10 por jogador.</li>
+      <li>Versao: Java ou Bedrock (informar na inscricao).</li>
+      <li>Modo de jogo: definido pela organizacao (ex: BedWars, SkyWars, Build Battle).</li>
+      <li>Proibido qualquer tipo de hack, mod de vantagem ou texture pack que revele informacoes.</li>
+      <li>Jogadores de dupla devem informar o parceiro na inscricao.</li>
+      <li>Servidor sera disponibilizado pela organizacao antes do evento.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════ WILD RIFT ══════════ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon wr">⚔️</div>
+    <div class="section-title wr">Wild Rift</div>
+  </div>
+  <div class="rule-card wr">
+    <ul>
+      <li>Formato: Squad (5 jogadores por equipe).</li>
+      <li>Inscricao: R$ 25 por squad.</li>
+      <li>Modo de jogo: Partida personalizada — Pick/Ban ativo.</li>
+      <li>Proibido uso de emulador — apenas dispositivos moveis.</li>
+      <li>Cada jogador deve usar a conta propria.</li>
+      <li>Em caso de queda nos primeiros 3 minutos, a partida pode ser reiniciada (1x por equipe).</li>
+      <li>Melhor de 1 (MD1) nas fases iniciais; eliminatorias em MD3; final em MD5.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════ CTA ══════════ -->
+<div class="cta-box">
+  <a href="index.html" class="cta-btn">Fazer minha inscricao &rarr;</a>
+</div>
+
+</div>
+</body>
+</html>
