@@ -709,18 +709,11 @@ async function submitForm() {
   };
 
   // Enviar para Google Sheets
-  if (CONFIG.SCRIPT_URL !== 'https://script.google.com/macros/library/d/1xfBhKerwiL6InpmNRe8GIATMz7d23aGza4yV_TbKRmhI7IQzJRLdurW7/2') {
-    try {
-      const formData = new FormData();
-      formData.append('data', JSON.stringify(payload));
-      await fetch(CONFIG.SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        body: formData
-      });
-    } catch (e) {
-      console.log('Dados para backup:', payload);
-    }
+  try {
+    const url = CONFIG.SCRIPT_URL + '?data=' + encodeURIComponent(JSON.stringify(payload));
+    await fetch(url, { method: 'GET', mode: 'no-cors' });
+  } catch (e) {
+    console.log('Dados para backup:', payload);
   }
 
   // Montar tela de sucesso
